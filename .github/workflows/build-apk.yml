@@ -1,0 +1,26 @@
+name: Build Matrix Calculator APK
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Build APK
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          workdir: .
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Matrix-Calculator-APK
+          path: bin/*.apk
